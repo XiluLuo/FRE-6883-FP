@@ -369,7 +369,7 @@ std::ostream & operator<<(std::ostream &out, const Vector &vtr)
         else out << " ";
         out << vtr[i];
     }
-    out << "]" << std::endl;
+    out << "]";
 
     return out;
 }
@@ -386,7 +386,8 @@ std::ostream & operator<<(std::ostream &out, const Matrix &mtx)
             else out << " ";
             out << mtx[r][c];
         }
-        out << "]" << std::endl;
+        out << "]";
+        if (r != mtx.Row() - 1) out << std::endl;
     }
     return out;
 }

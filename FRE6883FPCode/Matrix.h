@@ -10,6 +10,9 @@ private:
     std::vector<double> vec;
 
 public:
+    // Default Constructor
+    Vector() {}
+
     // Constructor
     Vector(unsigned int len_)
     {
@@ -20,6 +23,7 @@ public:
     Vector(const Vector &other)
     {
         vec = other.vec;
+        vec.resize(other.vec.size());
     }
 
     // Getter
