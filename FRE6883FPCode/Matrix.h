@@ -139,4 +139,10 @@ Matrix operator-(const Vector &vtr, const Matrix &mtx);
 std::ostream & operator<<(std::ostream &out, const Vector &vtr);
 std::ostream & operator<<(std::ostream &out, const Matrix &mtx);
 
+// Calculation
+Vector PctChange(const Vector &vtr);
+Matrix PctChange(const Matrix &mtx);
+Vector CumReturn(const Vector &vtr);
+Matrix CumReturn(const Matrix &mtx);
+
 #endif

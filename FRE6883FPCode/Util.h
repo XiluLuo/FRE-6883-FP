@@ -3,9 +3,11 @@
 
 #include <iostream>
 #include <string>
-#include "Matrix.h"
+#include <vector>
+#include <map>
+#include "Stock.h"
 
-Matrix PctChange(const Matrix &mtx);
+int RetrieveZacksData(const char * inputfile, std::map<std::string,Stock> &ZacksMap);
 bool IsNumber(const std::string s);
 int GetN();
 void PrintMenu();

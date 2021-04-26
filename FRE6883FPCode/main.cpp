@@ -1,10 +1,13 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 #include "Matrix.h"
 #include "Util.h"
 
 using namespace std;
+
+const char * zacks_filename = "./ZacksData.csv";
 
 int main()
 {
@@ -13,10 +16,46 @@ int main()
 
     int N = -1;  // Days to retrieve
 
-    // TODO:
-    // Read from CSV file the available Russel 1000 stocks
-    
-    // vector<string> 
+    map<string,Stock> ZacksMap;
+    if (RetrieveZacksData(zacks_filename, ZacksMap) == -1) return -1;
+
+    // vector<string> BottomStocks;
+    // vector<string> MiddleStocks;
+    // vector<string> UpperStocks;
+
+    // for (pair<const string,Stock> &p : ZacksMap)
+    // {
+    //     StockGroup group = p.second.GetGroup();
+    //     if (group == StkBottom) BottomStocks.push_back(p.first);
+    //     if (group == StkMiddle) MiddleStocks.push_back(p.first);
+    //     if (group == StkUpper) UpperStocks.push_back(p.first);
+    // }
+
+    // for (pair<const string,Stock> &p : ZacksMap)
+    // {
+    //     cout << p.second << endl;
+    // }
+
+    // cout << "Bottom Stocks:" << endl;
+    // for (string &bs : BottomStocks)
+    // {
+    //     cout << bs << endl;
+    // }
+
+    // cout << "Middle Stocks:" << endl;
+    // for (string &ms : BottomStocks)
+    // {
+    //     cout << ms << endl;
+    // }
+
+    // cout << "Upper Stocks:" << endl;
+    // for (string &us : BottomStocks)
+    // {
+    //     cout << us << endl;
+    // }
+
+    // // Delete the following
+    // return 0;
 
     do
     {
@@ -70,7 +109,7 @@ int main()
             // Show the Excel or gnuplot graph with CAAR for all 3 groups.
             break;
         }
-        
+
         default:
             break;
         }

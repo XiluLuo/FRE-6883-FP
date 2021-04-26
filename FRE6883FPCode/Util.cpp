@@ -1,17 +1,60 @@
 #include "Util.h"
+#include <fstream>
+#include <sstream>
+#include <vector>
 
-Matrix PctChange(const Matrix &mtx)
+int RetrieveZacksData(const char * inputfile, std::map<std::string,Stock> &ZacksMap)
 {
-    unsigned int nrow = mtx.Row();
-    unsigned int ncol = mtx.Col();
+    std::ifstream fin(inputfile);
 
-    Matrix M(nrow, ncol - 1);
+    if (!fin.is_open())
+    {
+        std::cerr << "ERROR: Unable to open " << inputfile << std::endl;
+        return -1;
+    }
 
-    for (unsigned int r = 0; r < nrow; r++)
-        for (unsigned int c = 0; c < ncol - 1; c++)
-            M[r][c] = (mtx[r][c+1] - mtx[r][c]) / mtx[r][c];
+    std::vector<std::string> stocks;
 
-    return M;
+    std::string line;
+    std::getline(fin, line);  // Skip the header
+    while (std::getline(fin, line))
+    {
+        std::istringstream iss(line);
+        std::string word;
+        std::vector<std::string> words;
+
+        while (getline(iss, word, ','))
+            words.push_back(word);
+
+        std::string Symbol = words[0];
+        std::string EarningsAmntDate = words[1];
+        std::string PeriodEnding = words[2];
+        double EstEarnings = stod(words[3]);
+        double RptEarnings = stod(words[4]);
+        double Surprise = stod(words[5]);
+        double SurprisePct = stod(words[6]);
+
+        Stock s(Symbol, EarningsAmntDate, PeriodEnding, EstEarnings, RptEarnings, Surprise, SurprisePct);
+        stocks.push_back(Symbol);
+        ZacksMap.insert({ Symbol, s });
+    }
+
+    int tot_stocks = ZacksMap.size();
+    int num_stocks_per_group = tot_stocks / 3;
+    if (tot_stocks % 3 != 0) num_stocks_per_group++;
+
+    for (int i = 0; i < stocks.size(); i++)
+    {
+        std::string Symbol = stocks[i];
+
+        StockGroup Group = StkBottom;
+        if (i >= num_stocks_per_group)
+            Group = (i >= 2 * num_stocks_per_group) ? StkUpper : StkMiddle;
+
+        ZacksMap[Symbol].SetGroup(Group);
+    }
+
+    return 0;
 }
 
 bool IsNumber(const std::string s)

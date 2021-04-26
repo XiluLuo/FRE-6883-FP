@@ -153,7 +153,7 @@ Matrix exp(const Matrix &other)
     unsigned int ncol = other.Col();
 
     Matrix mtx(nrow, ncol);
-    
+
     for (unsigned int r = 0; r < nrow; r++)
         for (unsigned int c = 0; c < ncol; c++)
             mtx[r][c] = exp(other[r][c]);
@@ -165,7 +165,7 @@ void operator+=(Matrix &mtx1, const Matrix &mtx2)
 {
     unsigned int nrow = mtx1.Row();
     unsigned int ncol = mtx1.Col();
-    
+
     for (unsigned int r = 0; r < nrow; r++)
         for (unsigned int c = 0; c < ncol; c++)
             mtx1[r][c] += mtx2[r][c];
@@ -175,7 +175,7 @@ void operator-=(Matrix &mtx1, const Matrix &mtx2)
 {
     unsigned int nrow = mtx1.Row();
     unsigned int ncol = mtx1.Col();
-    
+
     for (unsigned int r = 0; r < nrow; r++)
         for (unsigned int c = 0; c < ncol; c++)
             mtx1[r][c] -= mtx2[r][c];
@@ -361,6 +361,12 @@ Matrix operator-(const Vector &vtr, const Matrix &mtx)
 
 std::ostream & operator<<(std::ostream &out, const Vector &vtr)
 {
+    if (vtr.Len() == 0)
+    {
+        out << "[]";
+        return out;
+    }
+
     out << std::setiosflags(std::ios::fixed) << std::setprecision(4);
 
     for (unsigned int i = 0; i < vtr.Len(); i++)
@@ -376,6 +382,12 @@ std::ostream & operator<<(std::ostream &out, const Vector &vtr)
 
 std::ostream & operator<<(std::ostream &out, const Matrix &mtx)
 {
+    if (mtx.Row() == 0 || mtx.Col() == 0)
+    {
+        out << "[]";
+        return out;
+    }
+
     out << std::setiosflags(std::ios::fixed) << std::setprecision(4);
 
     for (unsigned int r = 0; r < mtx.Row(); r++)
@@ -390,4 +402,58 @@ std::ostream & operator<<(std::ostream &out, const Matrix &mtx)
         if (r != mtx.Row() - 1) out << std::endl;
     }
     return out;
+}
+
+// Calculation
+
+Vector PctChange(const Vector &vtr)
+{
+    unsigned int nitem = vtr.Len();
+
+    Vector V(nitem - 1);
+
+    for (unsigned int i = 0; i < nitem - 1; i++)
+        V[i] = (vtr[i+1] - vtr[i]) / vtr[i];
+
+    return V;
+}
+
+Matrix PctChange(const Matrix &mtx)
+{
+    unsigned int nrow = mtx.Row();
+    unsigned int ncol = mtx.Col();
+
+    Matrix M(nrow, ncol - 1);
+
+    for (unsigned int r = 0; r < nrow; r++)
+        for (unsigned int c = 0; c < ncol - 1; c++)
+            M[r][c] = (mtx[r][c+1] - mtx[r][c]) / mtx[r][c];
+
+    return M;
+}
+
+Vector CumReturn(const Vector &vtr)
+{
+    unsigned int nitem = vtr.Len();
+
+    Vector V(nitem - 1);
+
+    for (unsigned int i = 0; i < nitem; i++)
+        V[i] = (vtr[i+1] - vtr[0]) / vtr[0];
+
+    return V;
+}
+
+Matrix CumReturn(const Matrix &mtx)
+{
+    unsigned int nrow = mtx.Row();
+    unsigned int ncol = mtx.Col();
+
+    Matrix M(nrow, ncol - 1);
+
+    for (unsigned int r = 0; r < nrow; r++)
+        for (unsigned int c = 0; c < ncol - 1; c++)
+            M[r][c] = (mtx[r][c+1] - mtx[r][0]) / mtx[r][0];
+
+    return M;
 }
