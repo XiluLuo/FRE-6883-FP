@@ -1,4 +1,5 @@
-#include "Stock.h"
+#include "Stock.hpp"
+#include <cmath>
 
 std::ostream & operator<<(std::ostream &out, Stock &stk)
 {
@@ -14,4 +15,9 @@ std::ostream & operator<<(std::ostream &out, Stock &stk)
     out << "  Surprise %                = " << stk.SurprisePct << std::endl;
 
     return out;
+}
+
+bool ValidateStock(const Stock &s)
+{
+    return abs(s.GetSurprisePct()) < 1000;
 }

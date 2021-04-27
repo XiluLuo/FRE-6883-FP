@@ -1,7 +1,17 @@
-#include "Util.h"
+#include "Util.hpp"
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <utility>
+
+double str2double(std::string numstr)
+{
+    numstr.erase(remove_if(numstr.begin(), numstr.end(), [](unsigned char c)
+        {
+            return c == ',' || c == '"' || c == '$' || c == ' ';
+        }), numstr.end());
+    return stod(numstr);
+}
 
 int RetrieveZacksData(const char * inputfile, std::map<std::string,Stock> &ZacksMap)
 {
@@ -13,7 +23,7 @@ int RetrieveZacksData(const char * inputfile, std::map<std::string,Stock> &Zacks
         return -1;
     }
 
-    std::vector<std::string> stocks;
+    std::vector<std::pair<std::string,double>> stocks;
 
     std::string line;
     std::getline(fin, line);  // Skip the header
@@ -29,23 +39,32 @@ int RetrieveZacksData(const char * inputfile, std::map<std::string,Stock> &Zacks
         std::string Symbol = words[0];
         std::string EarningsAmntDate = words[1];
         std::string PeriodEnding = words[2];
-        double EstEarnings = stod(words[3]);
-        double RptEarnings = stod(words[4]);
-        double Surprise = stod(words[5]);
-        double SurprisePct = stod(words[6]);
+        double EstEarnings = str2double(words[3]);
+        double RptEarnings = str2double(words[4]);
+        double Surprise = str2double(words[5]);
+        double SurprisePct = str2double(words[6]);
 
         Stock s(Symbol, EarningsAmntDate, PeriodEnding, EstEarnings, RptEarnings, Surprise, SurprisePct);
-        stocks.push_back(Symbol);
-        ZacksMap.insert({ Symbol, s });
+
+        if (ValidateStock(s))
+        {
+            ZacksMap.insert({ Symbol, s });
+            stocks.push_back(std::pair<std::string,double>(Symbol, SurprisePct));
+        }
     }
 
     int tot_stocks = ZacksMap.size();
     int num_stocks_per_group = tot_stocks / 3;
     if (tot_stocks % 3 != 0) num_stocks_per_group++;
 
+    sort(stocks.begin(), stocks.end(),
+        [](const std::pair<std::string,double> &a,
+            const std::pair<std::string,double> &b)
+        { return a.second < b.second; });
+
     for (int i = 0; i < stocks.size(); i++)
     {
-        std::string Symbol = stocks[i];
+        std::string Symbol = stocks[i].first;
 
         StockGroup Group = StkBottom;
         if (i >= num_stocks_per_group)
@@ -93,14 +112,19 @@ int GetN()
 void PrintMenu()
 {
     std::cout << "MENU" << std::endl;
-    std::cout << "R) Enter N to retrieve 2N+1 days of historical price data for all stocks." << std::endl;
-    std::cout << "F) Pull information for one stock from one group." << std::endl;
-    std::cout << "S) Show AAR, AAR-SD, CAAR and CAAR-STD for one group." << std::endl;
-    std::cout << "P) Show the Excel or gnuplot graph with CAAR for all 3 groups." << std::endl;
+    std::cout << "A) Enter N to retrieve 2N+1 days of historical price data for all stocks." << std::endl;
+    std::cout << "B) Pull information for one stock from one group." << std::endl;
+    std::cout << "C) Show AAR, AAR-SD, CAAR and CAAR-STD for one group." << std::endl;
+    std::cout << "D) Show the Excel or gnuplot graph with CAAR for all 3 groups." << std::endl;
     std::cout << "X) Exit your program." << std::endl;
 }
 
 void PrintError(std::string msg)
+{
+    PrintError(msg.c_str());
+}
+
+void PrintError(const char *msg)
 {
     std::cerr << "ERROR: " << msg << std::endl;
 }

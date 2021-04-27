@@ -26,6 +26,13 @@ public:
         vec.resize(other.vec.size());
     }
 
+    // Constructor that takes over a vector
+    Vector(std::vector<double> &vtr)
+    {
+        vec = std::move(vtr);
+        vec.resize(vec.size());
+    }
+
     // Getter
     unsigned int Len() const
     {

@@ -37,7 +37,7 @@ while len(stock_map) < num_of_stocks:
     )
 
 stocks = list(stock_map.values())
-stocks.sort(key=lambda s: s[-1])
+# stocks.sort(key=lambda s: s[-1])
 
 with open('ZacksData.csv', 'w') as f:
     f.write("Symbol,EarningsAmntDate,PeriodEnding,EstEarnings,RptEarnings,Surprise,SurprisePct\n")

@@ -1,18 +1,22 @@
 #include <iostream>
 #include <string>
-#include "Matrix.h"
-#include "Stock.h"
+#include <vector>
+#include "Matrix.hpp"
+#include "Stock.hpp"
 
 using namespace std;
 
 int main()
 {
     string Symbol = "APL";
+    vector<double> vtr = { 12.0, 230, 45.0 };
 
-    Vector DailyPrices(3);
-    DailyPrices[0] = 12.;
-    DailyPrices[1] = 23.;
-    DailyPrices[2] = 45.;
+    Vector DailyPrices(vtr);
+    // Vector DailyPrices(3);
+    // DailyPrices[0] = 12.;
+    // DailyPrices[1] = 23.;
+    // DailyPrices[2] = 45.;
+    cout << "vtr.size = " << vtr.size() << endl;
 
     StockGroup Group = StkMiddle;
 

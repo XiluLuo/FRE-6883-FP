@@ -2,8 +2,9 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "Matrix.h"
-#include "Util.h"
+#include "Matrix.hpp"
+#include "Util.hpp"
+#include "YahooScrape.hpp"
 
 using namespace std;
 
@@ -39,19 +40,19 @@ int main()
     // cout << "Bottom Stocks:" << endl;
     // for (string &bs : BottomStocks)
     // {
-    //     cout << bs << endl;
+    //     cout << "Stock=" << bs << ",SurprisePct=" << ZacksMap[bs].GetSurprisePct() << endl;
     // }
 
     // cout << "Middle Stocks:" << endl;
-    // for (string &ms : BottomStocks)
+    // for (string &ms : MiddleStocks)
     // {
-    //     cout << ms << endl;
+    //     cout << "Stock=" << ms << ",SurprisePct=" << ZacksMap[ms].GetSurprisePct() << endl;
     // }
 
     // cout << "Upper Stocks:" << endl;
-    // for (string &us : BottomStocks)
+    // for (string &us : UpperStocks)
     // {
-    //     cout << us << endl;
+    //     cout << "Stock=" << us << ",SurprisePct=" << ZacksMap[us].GetSurprisePct() << endl;
     // }
 
     // // Delete the following
@@ -69,21 +70,30 @@ int main()
             continue;
         }
 
+        // Convert the input to uppercase
+        transform(input.begin(), input.end(), input.begin(), [](unsigned char c){ return toupper(c); });
         selection = input.c_str()[0];
 
         switch (selection)
         {
-        case 'R':
-        case 'r':
+        case 'A':
         {
             N = GetN();
             if (N == -1) continue;
 
+            map<string,vector<double>> DailyDataMap;
+            if (PullDataFromYahoo(ZacksMap, N, DailyDataMap) != 0)
+            {
+                PrintError("PullDataFromYahoo failed...");
+            }
+
+            cout << "There are " << ZacksMap.size() << " stocks in Zacks" << endl;
+            cout << "There are " << DailyDataMap.size() << " stocks in DailyData" << endl;
+
             break;
         }
 
-        case 'F':
-        case 'f':
+        case 'B':
         {
             // TODO:
             // Pull information for one stock from one group:
@@ -94,16 +104,14 @@ int main()
             break;
         }
 
-        case 'S':
-        case 's':
+        case 'C':
         {
             // TODO:
             // Show AAR, AAR-SD, CAAR and CAAR-STD for one group.
             break;
         }
 
-        case 'P':
-        case 'p':
+        case 'D':
         {
             // TODO:
             // Show the Excel or gnuplot graph with CAAR for all 3 groups.

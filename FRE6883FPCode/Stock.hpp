@@ -1,7 +1,7 @@
 #ifndef __6883_FP_STOCK_H_
 #define __6883_FP_STOCK_H_
 
-#include "Matrix.h"
+#include "Matrix.hpp"
 #include <string>
 #include <ostream>
 
@@ -144,5 +144,8 @@ public:
     // Display
     friend std::ostream & operator<<(std::ostream &out, Stock &stk);
 };
+
+// Other
+bool ValidateStock(const Stock &s);
 
 #endif
