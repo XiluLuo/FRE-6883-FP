@@ -6,6 +6,7 @@
 //
 
 #include "Util.hpp"
+#include "Stock.hpp"
 #include <iostream>
 #include <ctime>
 #include <sstream>
@@ -56,7 +57,7 @@ void printMenu()
     std::cout << "A) Enter N to retrieve 2N+1 days of historical price data for all stocks." << std::endl;
     std::cout << "B) Pull information for one stock from one group." << std::endl;
     std::cout << "C) Show AAR, AAR-STD, CAAR and CAAR-STD for one group." << std::endl;
-    std::cout << "D) Show the Excel or gnuplot graph with CAAR for all 3 groups." << std::endl;
+    std::cout << "D) Show the Excel or gnuplot graph with CAAR for all " << STOCK_GROUP_NUM << " groups." << std::endl;
     std::cout << "X) Exit your program." << std::endl;
 }
 

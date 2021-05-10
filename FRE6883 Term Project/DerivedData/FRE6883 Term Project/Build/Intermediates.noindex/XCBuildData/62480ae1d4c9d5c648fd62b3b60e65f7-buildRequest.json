@@ -1,0 +1,51 @@
+{
+  "buildCommand" : "prepareForIndexing",
+  "configuredTargets" : [
+    {
+      "guid" : "c76375bbf52fd77005a848fb8bebb24dfdf9517baace957689ac81dfe55be8c2"
+    }
+  ],
+  "continueBuildingAfterErrors" : true,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "x86_64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "macosx",
+      "sdk" : "macosx11.3",
+      "sdkVariant" : "macos",
+      "supportedArchitectures" : [
+        "x86_64h",
+        "x86_64"
+      ],
+      "targetArchitecture" : "x86_64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/devonc/Desktop/FRE6883FP/FRE6883 Term Project/DerivedData/FRE6883 Term Project/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/devonc/Desktop/FRE6883FP/FRE6883 Term Project/DerivedData/FRE6883 Term Project/Build/Products",
+      "derivedDataPath" : "/Users/devonc/Desktop/FRE6883FP/FRE6883 Term Project/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/devonc/Desktop/FRE6883FP/FRE6883 Term Project/DerivedData/FRE6883 Term Project/Index/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/devonc/Desktop/FRE6883FP/FRE6883 Term Project/DerivedData/FRE6883 Term Project/Index/PrecompiledHeaders",
+      "pchPath" : "/Users/devonc/Desktop/FRE6883FP/FRE6883 Term Project/DerivedData/FRE6883 Term Project/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO"
+        }
+      }
+    }
+  },
+  "qos" : "default",
+  "schemeCommand" : "launch",
+  "shouldCollectMetrics" : false,
+  "showNonLoggedProgress" : true,
+  "useDryRun" : true,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

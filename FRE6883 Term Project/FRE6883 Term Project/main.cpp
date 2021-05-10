@@ -97,6 +97,10 @@ int main(int argc, const char * argv[]) {
                 unsigned int K = 40;
                 
                 vector<Matrix> stockAbMatrices;
+                AARAvgMap.clear();
+                AARStdMap.clear();
+                CAARAvgMap.clear();
+                CAARStdMap.clear();
                 
                 createAbMatrix(ZacksMap, stockAbMatrices);
                 bootstrappingPerform(N, M, K, stockAbMatrices, AARAvgMap, CAARAvgMap, AARStdMap, CAARStdMap);
@@ -153,6 +157,7 @@ int main(int argc, const char * argv[]) {
                 
                 int plotStatus = plotResults(nitem, xData, yData);
                 
+                // Free the allocated memory
                 free(xData);
                 for (double * &ydp : yData)
                 {

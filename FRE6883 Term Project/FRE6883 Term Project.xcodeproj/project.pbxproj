@@ -14,8 +14,8 @@
 		044345242644DED7006D3FA2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 044345232644DED7006D3FA2 /* main.cpp */; };
 		0443452D2644E02F006D3FA2 /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0443452B2644E02F006D3FA2 /* Matrix.cpp */; };
 		044345332644E26D006D3FA2 /* Stock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 044345312644E26D006D3FA2 /* Stock.cpp */; };
-		044345362644E398006D3FA2 /* ZacksData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 044345342644E398006D3FA2 /* ZacksData.cpp */; };
 		044345392644EB28006D3FA2 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 044345372644EB28006D3FA2 /* Util.cpp */; };
+		047EE72F2649050D00C15E30 /* ZacksData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 047EE72D2649050D00C15E30 /* ZacksData.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,10 +48,10 @@
 		0443452C2644E02F006D3FA2 /* Matrix.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
 		044345312644E26D006D3FA2 /* Stock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Stock.cpp; sourceTree = "<group>"; };
 		044345322644E26D006D3FA2 /* Stock.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Stock.hpp; sourceTree = "<group>"; };
-		044345342644E398006D3FA2 /* ZacksData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ZacksData.cpp; path = DataStructures/ZacksData.cpp; sourceTree = "<group>"; };
-		044345352644E398006D3FA2 /* ZacksData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ZacksData.hpp; path = DataStructures/ZacksData.hpp; sourceTree = "<group>"; };
 		044345372644EB28006D3FA2 /* Util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
 		044345382644EB28006D3FA2 /* Util.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Util.hpp; sourceTree = "<group>"; };
+		047EE72D2649050D00C15E30 /* ZacksData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ZacksData.cpp; sourceTree = "<group>"; };
+		047EE72E2649050D00C15E30 /* ZacksData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ZacksData.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +99,6 @@
 				044345322644E26D006D3FA2 /* Stock.hpp */,
 				0443452A2644DFFB006D3FA2 /* DataStructures */,
 				044345232644DED7006D3FA2 /* main.cpp */,
-				044345342644E398006D3FA2 /* ZacksData.cpp */,
-				044345352644E398006D3FA2 /* ZacksData.hpp */,
 				044345372644EB28006D3FA2 /* Util.cpp */,
 				044345382644EB28006D3FA2 /* Util.hpp */,
 				0441A10926477052001774BD /* WebScrape.cpp */,
@@ -109,6 +107,8 @@
 				0441A11B2647B5AD001774BD /* Visualization.hpp */,
 				0441A11D2647B5C3001774BD /* Bootstrapping.cpp */,
 				0441A11E2647B5C3001774BD /* Bootstrapping.hpp */,
+				047EE72D2649050D00C15E30 /* ZacksData.cpp */,
+				047EE72E2649050D00C15E30 /* ZacksData.hpp */,
 			);
 			path = "FRE6883 Term Project";
 			sourceTree = "<group>";
@@ -181,9 +181,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0441A11F2647B5C3001774BD /* Bootstrapping.cpp in Sources */,
-				044345362644E398006D3FA2 /* ZacksData.cpp in Sources */,
 				0441A1112647743E001774BD /* jsoncpp.cpp in Sources */,
 				0441A11C2647B5AD001774BD /* Visualization.cpp in Sources */,
+				047EE72F2649050D00C15E30 /* ZacksData.cpp in Sources */,
 				0443452D2644E02F006D3FA2 /* Matrix.cpp in Sources */,
 				044345242644DED7006D3FA2 /* main.cpp in Sources */,
 				044345332644E26D006D3FA2 /* Stock.cpp in Sources */,
