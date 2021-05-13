@@ -7,8 +7,9 @@
 
 #include "Bootstrapping.hpp"
 #include <utility>
+#include <thread>
 
-#include <iostream>
+std::mutex MatrixMapMtx;
 
 Vector AAR(const Matrix &stockARMtx)
 {
@@ -69,16 +70,10 @@ void createAbMatrix(std::map<std::string,Stock> &ZacksMap, std::vector<Matrix> &
     }
 }
 
-void bootstrappingPerform(unsigned int N, unsigned int M, unsigned int K, const std::vector<Matrix> stockAbMatrices,
+void bootstrappingPerform(unsigned int N, unsigned int M, unsigned int K, const std::vector<Matrix> &stockAbMatrices,
                           std::map<StockGroup,Vector> &AARAvgMap, std::map<StockGroup,Vector> &CAARAvgMap,
                           std::map<StockGroup,Vector> &AARStdMap, std::map<StockGroup,Vector> &CAARStdMap)
 {
-//    for (int i = 0; i < STOCK_GROUP_NUM; i++)
-//    {
-//        AARAvgMap.insert({ SGTable[i], Vector(2 * N + 1) });
-//        CAARAvgMap.insert({ SGTable[i], Vector(2 * N + 1) });
-//    }
-    
     std::map<StockGroup,Matrix> AARMatrixMap;
     std::map<StockGroup,Matrix> CAARMatrixMap;
     
@@ -91,28 +86,20 @@ void bootstrappingPerform(unsigned int N, unsigned int M, unsigned int K, const 
         CAARMatrixMap.insert({ label, Matrix() });
     }
     
+    std::vector<std::thread> threadVec;
     for (auto i = 0; i < K; i++)
     {
-        std::map<StockGroup,Vector> AARMap;
-        std::map<StockGroup,Vector> CAARMap;
-        
-        boostrap(M, stockAbMatrices, AARMap, CAARMap);
-        
-        for (int i = 0; i < STOCK_GROUP_NUM; i++)
-        {
-            const StockGroup label = SGTable[i];
-//            AARAvgMap[label] += AARMap[label];
-//            CAARAvgMap[label] += CAARMap[label];
-            AARMatrixMap[label].append(AARMap[label]);
-            CAARMatrixMap[label].append(CAARMap[label]);
-        }
+        std::thread t(boostrap, M, std::ref(stockAbMatrices), std::ref(AARMatrixMap), std::ref(CAARMatrixMap));
+        threadVec.push_back(std::move(t));
+    }
+    for (std::thread &t : threadVec)
+    {
+        t.join();
     }
     
     for (int i = 0; i < STOCK_GROUP_NUM; i++)
     {
         const StockGroup label = SGTable[i];
-//        AARAvgMap[label] *= 1./K;
-//        CAARAvgMap[label] *= 1./K;
         AARAvgMap.insert({ label, mean(AARMatrixMap[label]) });
         AARStdMap.insert({ label, stdevp(AARMatrixMap[label]) });
         CAARAvgMap.insert({ label, mean(CAARMatrixMap[label]) });
@@ -120,24 +107,29 @@ void bootstrappingPerform(unsigned int N, unsigned int M, unsigned int K, const 
     }
 }
 
-void boostrap(unsigned int M, const std::vector<Matrix> stockAbMatrices, std::map<StockGroup,Vector> &AARMap, std::map<StockGroup,Vector> &CAARMap)
+void boostrap(unsigned int M, const std::vector<Matrix> &stockAbMatrices, std::map<StockGroup,Matrix> &AARMatrixMap, std::map<StockGroup,Matrix> &CAARMatrixMap)
 {
-    for (int i = 0; i < stockAbMatrices.size(); i++)
+    for (int i = 0; i < STOCK_GROUP_NUM; i++)
     {
-        const Matrix &origMtx = stockAbMatrices[i];
         const StockGroup label = SGTable[i];
-        std::unordered_set<long> indices = genRandomIndex(M, origMtx.row());
+        const Matrix &origMtx = stockAbMatrices[i];
         
+        std::unordered_set<long> indices = genRandomIndex(M, origMtx.row());
+
         Matrix mtx;
         for (const long &index : indices)
         {
             mtx.append(origMtx[index]);
         }
-        
+
         Vector AARVec = AAR(mtx);
         Vector CAARVec = CAAR(AARVec);
+
+        MatrixMapMtx.lock();
         
-        AARMap.insert({ label, AARVec });
-        CAARMap.insert({ label, CAARVec });
+        AARMatrixMap[label].append(AARVec);
+        CAARMatrixMap[label].append(CAARVec);
+        
+        MatrixMapMtx.unlock();
     }
 }

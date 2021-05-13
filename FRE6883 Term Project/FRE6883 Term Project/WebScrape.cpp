@@ -10,8 +10,6 @@
 #include "Util.hpp"
 #include "Matrix.hpp"
 #include <sstream>
-#include <thread>
-#include <future>
 #include <iostream>
 
 const std::string WebScraper::API_TOKEN = "605f41c6a29c69.96773141";

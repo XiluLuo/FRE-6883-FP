@@ -38,11 +38,12 @@ void createAbMatrix(std::map<std::string,Stock> &ZacksMap, std::vector<Matrix> &
 // CAARAvgMap: key=StkGroup, value=CAAR average Vector
 // AARStdMap: key=StkGroup, value=AAR stdev Vector
 // CAARStdMap: key=StkGroup, value=CAAR stdev Vector
-void bootstrappingPerform(unsigned int N, unsigned int M, unsigned int K, const std::vector<Matrix> stockAbMatrices,
+void bootstrappingPerform(unsigned int N, unsigned int M, unsigned int K, const std::vector<Matrix> &stockAbMatrices,
                           std::map<StockGroup,Vector> &AARAvgMap, std::map<StockGroup,Vector> &CAARAvgMap,
                           std::map<StockGroup,Vector> &AARStdMap, std::map<StockGroup,Vector> &CAARStdMap);
 
 // Perform one time bootstrapping
-void boostrap(unsigned int M, const std::vector<Matrix> stockAbMatrices, std::map<StockGroup,Vector> &AARMap, std::map<StockGroup,Vector> &CAARMap);
+void boostrap(unsigned int M, const std::vector<Matrix> &stockAbMatrices,
+              std::map<StockGroup,Matrix> &AARMatrixMap, std::map<StockGroup,Matrix> &CAARMatrixMap);
 
 #endif /* Bootstrapping_hpp */
