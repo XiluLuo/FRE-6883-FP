@@ -108,6 +108,40 @@
 			<key>uniqueIdentifier</key>
 			<string>0FF5F91C-62E4-4739-AE50-888680E44DF5</string>
 		</dict>
+		<key>1A047F05-B9D1-4991-85AA-EE3AF7A31BBF</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>1A047F05-B9D1-4991-85AA-EE3AF7A31BBF.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>FRE6883 Term Project project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>FRE6883 Term Project</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run FRE6883 Term Project</string>
+			<key>timeStartedRecording</key>
+			<real>642746191.80740702</real>
+			<key>timeStoppedRecording</key>
+			<real>642746476.83461499</real>
+			<key>title</key>
+			<string>Run FRE6883 Term Project</string>
+			<key>uniqueIdentifier</key>
+			<string>1A047F05-B9D1-4991-85AA-EE3AF7A31BBF</string>
+		</dict>
 		<key>29DB023A-7771-4ADB-9A52-4476B12CDB88</key>
 		<dict>
 			<key>className</key>
