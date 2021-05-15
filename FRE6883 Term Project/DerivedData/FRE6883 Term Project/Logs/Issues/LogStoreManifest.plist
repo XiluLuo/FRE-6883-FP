@@ -34,7 +34,7 @@
 			<key>uniqueIdentifier</key>
 			<string>2E03F857-A1D4-4AD4-AD8D-E957C46B6306</string>
 		</dict>
-		<key>3E50EAB5-B4A6-44B3-8623-C204A78CEB4A</key>
+		<key>705EAA7E-A4F7-4F47-9450-8D968D97939B</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogMajorGroupSection</string>
@@ -43,7 +43,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.target.product-type.tool</string>
 			<key>fileName</key>
-			<string>3E50EAB5-B4A6-44B3-8623-C204A78CEB4A.xcactivitylog</string>
+			<string>705EAA7E-A4F7-4F47-9450-8D968D97939B.xcactivitylog</string>
 			<key>hasPrimaryLog</key>
 			<true/>
 			<key>primaryObservable</key>
@@ -54,13 +54,13 @@
 			<key>signature</key>
 			<string>FRE6883_Term_Project-fuomginwzzkceaaehbtqnalaclpl</string>
 			<key>timeStartedRecording</key>
-			<real>642632832.20421898</real>
+			<real>642743499.46653795</real>
 			<key>timeStoppedRecording</key>
-			<real>642632835.29047406</real>
+			<real>642743500.91896605</real>
 			<key>title</key>
 			<string>Build target FRE6883 Term Project</string>
 			<key>uniqueIdentifier</key>
-			<string>3E50EAB5-B4A6-44B3-8623-C204A78CEB4A</string>
+			<string>705EAA7E-A4F7-4F47-9450-8D968D97939B</string>
 		</dict>
 	</dict>
 	<key>preserveOldLogs</key>

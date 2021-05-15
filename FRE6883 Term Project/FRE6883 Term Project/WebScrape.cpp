@@ -134,6 +134,7 @@ void WebScraper::PopulateDailyInfo(Stock &stock, int N, std::map<std::string,dou
     
     int index = -1;
     double distance_min = std::numeric_limits<double>::max();
+    double distance_pre = distance_min;
     
     for (auto i = 0; i < TradeDataVec.size(); i++)
     {
@@ -146,6 +147,10 @@ void WebScraper::PopulateDailyInfo(Stock &stock, int N, std::map<std::string,dou
             index = i;
             distance_min = distance;
         }
+        
+        if (distance > distance_pre) { break; }
+        
+        distance_pre = distance;
     }
     
     // We need 2N+2 items for price => 2N+1 returns
@@ -153,11 +158,11 @@ void WebScraper::PopulateDailyInfo(Stock &stock, int N, std::map<std::string,dou
     {
         // Not enough data available
         // Possible for stocks like MCFE, MSP, VNT when N=30
-        std::cerr << "Symbol=" << symbol << std::endl;
+        std::cerr << "[Failure] " << symbol << std::endl;
         std::cerr << "TradeDataVec.size()=" << TradeDataVec.size() << std::endl;
-        std::cerr << "index=" << index << ", N=" << N << std::endl;
-        std::cerr << "index-(N+1)=" << (index-(N+1)) << ", index+N=" << (index+N) << std::endl;
-        std::cerr << "Failed to populate daily trade info for " << stock.GetSymbol() << std::endl;
+        std::cerr << "index=" << index << ", N=" << N
+            << ", index-(N+1)=" << (index-(N+1))
+            << ", index+N=" << (index+N) << std::endl;
         
         return;
     }

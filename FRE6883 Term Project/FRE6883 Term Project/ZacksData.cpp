@@ -7,6 +7,8 @@
 
 #include "ZacksData.hpp"
 
+#include <iostream>
+
 void ZacksDataRetriever::cleanup()
 {
     this->inputfile.clear();
@@ -82,18 +84,31 @@ void ZacksDataRetriever::build(const char *fname)
          { return a.second < b.second; }
     );
     
+    // Counter table
+    int StkCounter[STOCK_GROUP_NUM] = { 0 };
+    
     // Assign a label to each stock
     int index = 0;
-    for (unsigned short i = 0; i < STOCK_GROUP_NUM; i++)
+    while (index < stocks.size())
     {
+        int i = index / num_stocks_per_group;
+        if (i >= STOCK_GROUP_NUM) { i--; }
+        
         StockGroup label = SGTable[i];
         
-        for (int k = 0; k < num_stocks_per_group && index < stocks.size(); k++)
-        {
-            const std::string &Symbol = stocks[index].first;
-            ZacksMap[Symbol].SetGroup(label);
-            index++;
-        }
+        const std::string &Symbol = stocks[index].first;
+        ZacksMap[Symbol].SetGroup(label);
+        StkCounter[i]++;
+        
+        index++;
     }
+    
+    // Print how many stocks in each group
+    // Just for reference
+    for (int i = 0; i < STOCK_GROUP_NUM; i++)
+    {
+        std::cout << "Group=" << StockGroupStrMap[SGTable[i]] << ", #Stocks=" << StkCounter[i] << std::endl;
+    }
+    std::cout << std::endl;
 }
 
