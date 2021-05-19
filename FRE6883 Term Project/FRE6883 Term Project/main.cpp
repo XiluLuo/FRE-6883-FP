@@ -79,6 +79,10 @@ int main(int argc, const char * argv[]) {
                 cout << "Enter stock symbol: ";
                 cin >> symbol;
                 
+                // Prof. Tang inquired why we did not make stock symbols case-insensitive
+                // I know you said it's not required, but I'll add that feature here anyway
+                transform(symbol.begin(), symbol.end(), symbol.begin(), ::toupper);
+                
                 if (ZacksMap.find(symbol) == ZacksMap.end())
                 {
                     // Not found
@@ -104,6 +108,30 @@ int main(int argc, const char * argv[]) {
                 
                 createAbMatrix(ZacksMap, stockAbMatrices);
                 bootstrappingPerform(N, M, K, stockAbMatrices, AARAvgMap, CAARAvgMap, AARStdMap, CAARStdMap);
+                
+                /* BEGIN 3D Matrix */// Added for meeting project requirement
+                vector<Matrix> resMtx;
+                for (int i = 0; i < STOCK_GROUP_NUM; i++)
+                {
+                    const StockGroup label = SGTable[i];
+                    Matrix groupResMtx;
+                    
+                    groupResMtx.append(AARAvgMap[label]);
+                    groupResMtx.append(AARStdMap[label]);
+                    groupResMtx.append(CAARAvgMap[label]);
+                    groupResMtx.append(CAARStdMap[label]);
+                    
+                    resMtx.push_back(groupResMtx);
+                }
+                
+                // Print out the 3D matrix
+                cout << "[" << endl;
+                for (auto i = 0; i < resMtx.size(); i++)
+                {
+                    cout << resMtx[i] << (i == resMtx.size() - 1 ? "" : ", ") << endl;
+                }
+                cout << "]" << endl << endl;
+                /* END 3D Matrix */
                 
                 for (int i = 0; i < STOCK_GROUP_NUM; i++)
                 {

@@ -62,6 +62,34 @@
 			<key>uniqueIdentifier</key>
 			<string>705EAA7E-A4F7-4F47-9450-8D968D97939B</string>
 		</dict>
+		<key>84E4F3BB-C9A9-4DEA-B507-2561D50E44DA</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogMajorGroupSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.target.product-type.tool</string>
+			<key>fileName</key>
+			<string>84E4F3BB-C9A9-4DEA-B507-2561D50E44DA.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>signature</key>
+			<string>FRE6883_Term_Project-fhtednuxmeqbzfexilhmhrjnuoae</string>
+			<key>timeStartedRecording</key>
+			<real>643079767.17889702</real>
+			<key>timeStoppedRecording</key>
+			<real>643079769.22457194</real>
+			<key>title</key>
+			<string>Build target FRE6883 Term Project</string>
+			<key>uniqueIdentifier</key>
+			<string>84E4F3BB-C9A9-4DEA-B507-2561D50E44DA</string>
+		</dict>
 	</dict>
 	<key>preserveOldLogs</key>
 	<true/>
